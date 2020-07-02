@@ -177,36 +177,104 @@ def reverse_transformation(neighbourhood):
         new_neighbourhood.append(temp)
     return new_neighbourhood
 
-def main():
+def padding(plain_text,block_size):
+    plain_text += '0'*(block_size-len(plain_text))
+    return plain_text
+
+def chunkstring(string, length):
+    return list(string[0+i:length+i] for i in range(0, len(string), length))
+
+def dec_to_bin_list(dec):
+    b = [int(i) for i in list('{0:0b}'.format(dec))]
+    while len(b)<8:
+        b.insert(0,0)
+    return b
+
+def bin_list_to_dec(binary_list):
+    return int("".join(str(x) for x in binary_list), 2)
+
+def encrypt(plaintext,blocksize=8,iterations=10):
+    chunks =  chunkstring(plaintext,blocksize)
+    chunks[-1] = padding(chunks[-1],blocksize)
+    # print(chunks)
+    binary_ascii_chunks = []
+    for chunk in chunks:
+        temp = []
+        for character in chunk:
+            temp.append(dec_to_bin_list(ord(character)))
+        binary_ascii_chunks.append(temp)
+    # print(binary_ascii_chunks)
+    encrypted_grids = []
+    for binary_grid in binary_ascii_chunks:
+        for i in range(iterations):
+            new_grid = evolve(binary_grid,flag=i,enc_or_dec='encrypt')
+            binary_grid = new_grid
+        encrypted_grids.append(binary_grid)
+
+    ciphertext = []
+    for encrypted_binary_grid in encrypted_grids:
+        temp = []
+        for row in encrypted_binary_grid:
+            ascii_val = bin_list_to_dec(row)
+            temp.append(ascii_val)
+        # print('----------------')
+        ciphertext.append(temp)
+    # print(ciphertext)
+    return ciphertext
+   
+def decrypt(ciphertext,iterations=10,blocksize=8):
+    binary_encrypted_grids = []
+    for chunk in ciphertext:
+        temp = []
+        for num in chunk:
+            temp.append(dec_to_bin_list(num))
+        binary_encrypted_grids.append(temp)
+
+    ascii_values = []
+    for binary_grid in binary_encrypted_grids:
+        for i in range(1,iterations+1):
+            new_grid = evolve(binary_grid,flag=i,enc_or_dec='decrypt')
+            binary_grid = new_grid
+
+        for row in binary_grid:
+            ascii_values.append(bin_list_to_dec(row))
+
+    for i in range(len(ascii_values)-1,0,-1):
+        if ascii_values[i] == ord('0'):
+            ascii_values.pop(i)
+
+    decryptedtext = ''
+    for num in ascii_values:
+        decryptedtext += chr(num)
     
-    iterations = 20
+    return decryptedtext
 
-    grid = [[0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 1, 0, 1, 1],
-            [0, 1, 0, 1, 0, 1, 0, 1],
-            [0, 0, 0, 1, 1, 0, 1, 1],
-            [1, 0, 1, 0, 1, 0, 1, 0],
-            [0, 0, 0, 1, 1, 0, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            [0, 0, 0, 1, 1, 0, 1, 1]]
+# iterations = 52
+
+# grid = [[0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 1, 1, 0, 1, 1],
+#         [0, 1, 0, 1, 0, 1, 0, 1],
+#         [0, 0, 0, 1, 1, 0, 1, 1],
+#         [1, 0, 1, 0, 1, 0, 1, 0],
+#         [0, 0, 0, 1, 1, 0, 1, 1],
+#         [1, 1, 1, 1, 1, 1, 1, 1],
+#         [0, 0, 0, 1, 1, 0, 1, 1]]
 
 
-    ################################## ENCRYPTION ##################################
-    print('Encrypting...')
-    for i in range(iterations):
-        new_grid = evolve(grid,flag=i,enc_or_dec='encrypt')
-        grid = new_grid
+# ################################## ENCRYPTION ##################################
+# print('Encrypting...')
+# for i in range(iterations):
+#     new_grid = evolve(grid,flag=i,enc_or_dec='encrypt')
+#     grid = new_grid
 
-    for row in grid:
-        print(row)
+# for row in grid:
+#     print(row)
 
-    ################################## DECRYPTION ##################################
-    print('Decrypting...')
-    for i in range(1,iterations+1):
-        new_grid = evolve(grid,flag=i,enc_or_dec='decrypt')
-        grid = new_grid
+# ################################## DECRYPTION ##################################
+# print('Decrypting...')
+# for i in range(1,iterations+1):
+#     new_grid = evolve(grid,flag=i,enc_or_dec='decrypt')
+#     grid = new_grid
 
-    for row in grid:
-        print(row)
-
-main()
+# for row in grid:
+#     print(row)
