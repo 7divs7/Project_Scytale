@@ -11,6 +11,7 @@ def split_4_pair(row):
 def evolve(grid,flag,enc_or_dec):
     if flag%2 == 0:
         # blue neighbourhood
+
         blue = []
         for i in range(0,len(grid),2):
             t = split_4_pair(grid[i])
@@ -248,33 +249,3 @@ def decrypt(ciphertext,iterations=10,blocksize=8):
         decryptedtext += chr(num)
     
     return decryptedtext
-
-# iterations = 52
-
-# grid = [[0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 1, 1, 0, 1, 1],
-#         [0, 1, 0, 1, 0, 1, 0, 1],
-#         [0, 0, 0, 1, 1, 0, 1, 1],
-#         [1, 0, 1, 0, 1, 0, 1, 0],
-#         [0, 0, 0, 1, 1, 0, 1, 1],
-#         [1, 1, 1, 1, 1, 1, 1, 1],
-#         [0, 0, 0, 1, 1, 0, 1, 1]]
-
-
-# ################################## ENCRYPTION ##################################
-# print('Encrypting...')
-# for i in range(iterations):
-#     new_grid = evolve(grid,flag=i,enc_or_dec='encrypt')
-#     grid = new_grid
-
-# for row in grid:
-#     print(row)
-
-# ################################## DECRYPTION ##################################
-# print('Decrypting...')
-# for i in range(1,iterations+1):
-#     new_grid = evolve(grid,flag=i,enc_or_dec='decrypt')
-#     grid = new_grid
-
-# for row in grid:
-#     print(row)
