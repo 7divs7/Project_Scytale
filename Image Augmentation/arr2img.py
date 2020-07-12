@@ -1,16 +1,25 @@
 import numpy as np
-import matplotlib.pyplot as plt 
+import random
+from PIL import Image
 
-grid = [[0, 1, 1, 1, 1, 0, 0, 1], 
-        [0, 1, 1, 1, 1, 1, 1, 1], 
-        [0, 1, 0, 0, 0, 0, 1, 0], 
-        [1, 1, 1, 0, 1, 1, 0, 0], 
-        [0, 0, 0, 1, 1, 1, 0, 0], 
-        [1, 0, 1, 1, 1, 1, 1, 1], 
-        [0, 0, 0, 0, 0, 1, 1, 0], 
-        [1, 0, 0, 0, 1, 0, 0, 1]]
+def generate():
+        grid = []
+        for i in range(8):
+                grid.append(random.randint(0,255))
+        return grid
 
-x = np.asarray(grid)
-print(x.shape)
-plt.imshow(x, cmap='gray')
-plt.show()
+def main():
+        n = int(input('Enter Number of Data Chunks: '))
+        while n!=0:
+                line_matrix = generate()
+                grid = []
+                for i in range (0,8):
+                        grid.append(line_matrix)
+                n -= 1
+        grid = np.array(grid)
+        # print(grid)
+        img = Image.fromarray(np.uint8(grid))
+        img.save('test.png')
+
+if __name__ == "__main__":
+        main()
