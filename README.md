@@ -12,6 +12,8 @@
 
 This repository contains all codes related to our research paper titled "Scytale - An Evolutionary Cryptosystem". The paper is available here:
 
+http://ijcsn.org/IJCSN-2020/9-4/Scytale-An-Evolutionary-Cryptosystem.pdf
+
 With the advent of quantum computing, and other advancements in computation and processing capabilities of modern systems,
 there arises a need to develop new trapdoor functions that will serve as the foundation for a new generation of encryption schemes. This
 paper explores the possibility of one such potential trapdoor function using concepts stemming from Reversible Cellular Automata (RCA)
@@ -51,3 +53,21 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Citation
 If you find this code useful in your research, please consider citing (BibTex):
+
+```
+@article{
+	author = {Unnikrishnan Menon and Atharva Hudlikar and Divyani Panda},
+	title = {Scytale - An Evolutionary Cryptosystem},
+	journal = {International Journal of Computer Science and Network},
+	issue_date = {August 2020},
+	volume = {9},
+	number = {4},
+	month = {Aug},
+	year = {2020},
+	issn = {2277-5420},
+	pages = {153-159},
+	numpages = {7},
+	url = {http://ijcsn.org/articles/0904/Scytale-An-Evolutionary-Cryptosystem.html},
+	publisher = {Digital Library of Academic Research},
+}
+```
