@@ -12,7 +12,7 @@
 
 This repository contains all codes related to our research paper titled "Scytale - An Evolutionary Cryptosystem". The paper is available here:
 
-http://ijcsn.org/IJCSN-2020/9-4/Scytale-An-Evolutionary-Cryptosystem.pdf
+https://arxiv.org/abs/2008.05290
 
 With the advent of quantum computing, and other advancements in computation and processing capabilities of modern systems,
 there arises a need to develop new trapdoor functions that will serve as the foundation for a new generation of encryption schemes. This
