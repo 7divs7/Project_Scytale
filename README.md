@@ -55,7 +55,7 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 If you find this code useful in your research, please consider citing (BibTex):
 
 ```
-@article{
+@article{menon2020scytale,
 	author = {Unnikrishnan Menon and Atharva Hudlikar and Divyani Panda},
 	title = {Scytale - An Evolutionary Cryptosystem},
 	journal = {International Journal of Computer Science and Network},
